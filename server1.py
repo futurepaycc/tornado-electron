@@ -29,7 +29,7 @@ class Application(tornado.web.Application):
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("hello1.html",)
+        self.render("hello1.html")
 
 
 def main():
