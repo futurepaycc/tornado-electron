@@ -44,7 +44,8 @@ d3.csv("/static/data.csv", function (error, data) {
     //定义x轴
     svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")");
+        .attr("transform", "translate(0," + height + ")")
+        .text("日期");
     //定义y轴
     svg.append("g")
         .attr("class", "y axis")
@@ -62,7 +63,7 @@ d3.csv("/static/data.csv", function (error, data) {
 });
 
 function draw(data) {
-    //这是对比例尺对象做的什么处理???????
+    //这是对比例尺对象做的什么处理?? -- data数据的提取转换器????
     x.domain(data.map(candlestick.accessor().d));
     y.domain(techan.scale.plot.ohlc(data, candlestick.accessor()).domain());
 
