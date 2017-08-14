@@ -1,7 +1,7 @@
 /** 进行宽高计算、D3伸缩计算 */
-var margin = { top: 20, right: 20, bottom: 30, left: 50 }
-var width = 960 - margin.left - margin.right
-var height = 500 - margin.top - margin.bottom
+var margin = { top: 100, right: 100, bottom: 100, left: 100 }
+var width = window.innerWidth - margin.left - margin.right
+var height = window.innerHeight - margin.top - margin.bottom
 
 var parseDate = d3.timeParse("%d-%b-%y"); //函数式引用
 
@@ -15,10 +15,12 @@ var candlestick = techan.plot.candlestick().xScale(x).yScale(y);
 var xAxis = d3.axisBottom().scale(x);
 var yAxis = d3.axisLeft().scale(y);
 
-/** 生成svg画布元素， 需要了解下面的transform动作????? */
+/** 定义整体svg画布元素，定义宽、高和初步位移!!! */
 var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    // .attr("width", width + margin.left + margin.right)
+    // .attr("height", height + margin.top + margin.bottom)
+    .attr("width",width+margin.left)
+    .attr("height",height+margin.top*1.5)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
