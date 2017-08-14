@@ -18,6 +18,7 @@ class Application(tornado.web.Application):
         handlers = [
             (r"/", Hello1Handler),
             (r"/blank",BlankHandler),
+            (r"/target",TargetHandler),
 			(r"/static/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(os.path.dirname(__file__), "static")})
         ]
         settings = dict(
@@ -35,6 +36,10 @@ class Hello1Handler(tornado.web.RequestHandler):
 class BlankHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("blank.html")
+
+class TargetHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("target.html")
 
 
 def main():
