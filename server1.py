@@ -25,7 +25,7 @@ class Application(tornado.web.Application):
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             debug=True,
         )
-        tornado.web.Application.__init__(self, handlers, **settings)
+        tornado.web.Application.__init__(self, handlers, **settings) #两个星的语法？
 
 
 class Hello1Handler(tornado.web.RequestHandler):

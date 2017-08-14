@@ -5,17 +5,17 @@ var height = 500 - margin.top - margin.bottom
 
 var parseDate = d3.timeParse("%d-%b-%y"); //函数式引用
 
+//x轴金融比例尺
 var x = techan.scale.financetime().range([0, width]);
-
+//y轴d3线性比例尺
 var y = d3.scaleLinear().range([height, 0]);
-
+//蜡烛图元素
 var candlestick = techan.plot.candlestick().xScale(x).yScale(y);
-
+//x,y轴定义，应用对应比例尺
 var xAxis = d3.axisBottom().scale(x);
-
 var yAxis = d3.axisLeft().scale(y);
 
-/** 生成svg画布 */
+/** 生成svg画布元素， 需要了解下面的transform动作????? */
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -37,12 +37,13 @@ d3.csv("/static/data.csv", function (error, data) {
         };
     }).sort(function (a, b) { return d3.ascending(accessor.d(a), accessor.d(b)); });
 
+    //定义candlestick区
     svg.append("g").attr("class", "candlestick");
-    //绘制x轴
+    //定义x轴
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")");
-    //绘制y轴
+    //定义y轴
     svg.append("g")
         .attr("class", "y axis")
         .append("text")
@@ -59,9 +60,11 @@ d3.csv("/static/data.csv", function (error, data) {
 });
 
 function draw(data) {
+    //这是对比例尺对象做的什么处理???????
     x.domain(data.map(candlestick.accessor().d));
     y.domain(techan.scale.plot.ohlc(data, candlestick.accessor()).domain());
 
+    //执行绘制的地方，把candlestick轴的绘制当做轴一样处理
     svg.selectAll("g.candlestick").datum(data).call(candlestick);
     svg.selectAll("g.x.axis").call(xAxis);
     svg.selectAll("g.y.axis").call(yAxis);
