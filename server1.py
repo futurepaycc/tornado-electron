@@ -16,7 +16,8 @@ define("port", default=8888, help="run on the given port", type=int)
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/", MainHandler),
+            (r"/", Hello1Handler),
+            (r"/blank",BlankHandler),
 			(r"/static/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(os.path.dirname(__file__), "static")})
         ]
         settings = dict(
@@ -27,9 +28,13 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, **settings)
 
 
-class MainHandler(tornado.web.RequestHandler):
+class Hello1Handler(tornado.web.RequestHandler):
     def get(self):
         self.render("hello1.html")
+
+class BlankHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("blank.html")
 
 
 def main():
