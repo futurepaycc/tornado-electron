@@ -2,7 +2,8 @@
 var width = window.innerWidth*0.9
 var height = window.innerHeight*0.9
 
-var parseDate = d3.timeParse("%d-%b-%y"); //函数式引用
+//函数式引用，月份更改格式[https://github.com/d3/d3-time-format/blob/master/README.md#locale_format]出错
+var parseDate = d3.timeParse("%d-%b-%y"); 
 
 //x轴金融比例尺
 var x = techan.scale.financetime().range([0, width]);
