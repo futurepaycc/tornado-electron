@@ -1,7 +1,6 @@
-/** 进行宽高计算、D3伸缩计算 */
-var margin = { top: 100, right: 100, bottom: 100, left: 100 }
-var width = window.innerWidth - margin.left - margin.right
-var height = window.innerHeight - margin.top - margin.bottom
+/** 蜡烛图元素的宽高计算、D3伸缩计算 */
+var width = window.innerWidth*0.9
+var height = window.innerHeight*0.9
 
 var parseDate = d3.timeParse("%d-%b-%y"); //函数式引用
 
@@ -9,20 +8,18 @@ var parseDate = d3.timeParse("%d-%b-%y"); //函数式引用
 var x = techan.scale.financetime().range([0, width]);
 //y轴d3线性比例尺
 var y = d3.scaleLinear().range([height, 0]);
-//蜡烛图元素
+//蜡烛图元素(图区的宽、高是由这里的比例尺界定的！！)
 var candlestick = techan.plot.candlestick().xScale(x).yScale(y);
 //x,y轴定义，应用对应比例尺
 var xAxis = d3.axisBottom().scale(x);
 var yAxis = d3.axisLeft().scale(y);
 
-/** 定义整体svg画布元素，定义宽、高和初步位移!!! */
+/** 定义整体svg画布元素(外层根容器)，定义宽、高和初步位移!!! */
 var svg = d3.select("body").append("svg")
-    // .attr("width", width + margin.left + margin.right)
-    // .attr("height", height + margin.top + margin.bottom)
-    .attr("width",width+margin.left)
-    .attr("height",height+margin.top*1.5)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("width",window.innerWidth*0.95)
+    .attr("height",window.innerHeight*0.95)
+    .append("g")//内层分组容器：包含蜡烛图区、x轴、y轴(为了显示，右移20像素)
+    .attr("transform", "translate(" + 20+ "," + 0 + ")");
 
 /** 请求填充数据、绘制图形 */
 d3.csv("/static/data.csv", function (error, data) {
@@ -56,10 +53,10 @@ d3.csv("/static/data.csv", function (error, data) {
         .style("text-anchor", "end")
         .text("美元");
 
-    // Data to display initially 绘制50条
+    // 初始绘制50条
     draw(data.slice(0, data.length - 150));
-    // Only want this button to be active if the data has loaded 绘制200条
-    d3.select("button").on("click", function () { draw(data); }).style("display", "inline");
+    // 更新按钮 绘制200条
+    //d3.select("button").on("click", function () { draw(data); }).style("display", "inline");
 });
 
 function draw(data) {
