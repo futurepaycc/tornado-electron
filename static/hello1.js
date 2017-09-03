@@ -35,7 +35,9 @@ d3.csv("/static/data.csv", function (error, data) {
             close: +d.Close,
             volume: +d.Volume
         };
-    }).sort(function (a, b) { return d3.ascending(accessor.d(a), accessor.d(b)); });
+    }).sort(function (a, b) { 
+        return d3.ascending(accessor.d(a), accessor.d(b)); 
+    });
 
     //定义candlestick区
     svg.append("g").attr("class", "candlestick");
@@ -62,8 +64,8 @@ d3.csv("/static/data.csv", function (error, data) {
 
 function draw(data) {
     //这是对比例尺对象做的什么处理?? -- data数据的提取转换器????
-    x.domain(data.map(candlestick.accessor().d));
-    y.domain(techan.scale.plot.ohlc(data, candlestick.accessor()).domain());
+    x.domain(data.map(candlestick.accessor().d));//提取日期
+    y.domain(techan.scale.plot.ohlc(data, candlestick.accessor()).domain());//没有文档!!!
 
     //执行绘制的地方，把candlestick轴的绘制当做轴一样处理
     svg.selectAll("g.candlestick").datum(data).call(candlestick);
