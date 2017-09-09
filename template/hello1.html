@@ -1,43 +1,55 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-    body {
-        font: 10px sans-serif;
-    }
-
-    text {
-        fill: #000;
-    }
-
-    button {
-        position: absolute;
-        right: 20px;
-        top: 440px;
-        display: none;
-    }
-
-    path.candle {
-        stroke: #000000;
-    }
-
-    path.candle.body {
-        stroke-width: 0;
-    }
-
-    path.candle.up {
-        fill: #00AA00;
-        stroke: #00AA00;
-    }
-
-    path.candle.down {
-        fill: #FF0000;
-        stroke: #FF0000;
-    }
-</style>
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            font: 10px sans-serif;
+        }
+    
+        text {
+            fill: #000;
+        }
+    
+        button {
+            position: absolute;
+            right: 20px;
+            top: 440px;
+            display: none;
+        }
+    
+        path.candle {
+            stroke: #000000;
+        }
+    
+        path.candle.body {
+            stroke-width: 0;
+        }
+    
+        path.candle.up {
+            fill: #00AA00;
+            stroke: #00AA00;
+        }
+    
+        path.candle.down {
+            fill: #FF0000;
+            stroke: #FF0000;
+        }
+        #content{
+            margin: 0px,0px;
+            height: 100%;
+            width: 100%;
+        }
+    </style>    
+</head>
 <body>
+    <div id="content"></div>
     <button>Update</button>
-    <!-- 这里要用新版 v4 -->
     <script src="https://cdn.bootcss.com/d3/4.10.0/d3.min.js"></script>
     <script src="https://cdn.bootcss.com/techan.js/0.8.0/techan.min.js"></script>
-    <script src="/static/hello1.js"></script>
+    <script src="/static/hello1.js"></script>    
+</body>
+</html>

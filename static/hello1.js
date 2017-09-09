@@ -15,10 +15,8 @@ var candlestick = techan.plot.candlestick().xScale(x).yScale(y);
 var xAxis = d3.axisBottom().scale(x);
 var yAxis = d3.axisLeft().scale(y);
 
-/** 定义整体svg画布元素，定义宽、高和初步位移!!! */
+/** 定义整体svg容器！！，定义宽、高和初步位移!!! */
 var svg = d3.select("body").append("svg")
-    // .attr("width", width + margin.left + margin.right)
-    // .attr("height", height + margin.top + margin.bottom)
     .attr("width",width+margin.left)
     .attr("height",height+margin.top*1.5)
     .append("g")
